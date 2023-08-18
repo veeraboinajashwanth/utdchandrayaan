@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <section class="container">
+    <img src="Screenshot.jpg" alt="" class="image" />
+    <header>INDIA'S MISSION MOON</header>
+    <p>
+      Chandrayaan-3 will become the first spacecraft to land on the moon's south polar region
+    </p>
+    <div class="time-content">
+      <div class="timedays" style="color: aliceblue;">
+        <span class="number"></span>
+        <span class="text">days</span>
+      </div>
+      <div class="timehours" style="color: aliceblue;">
+        <span class="number"></span>
+        <span class="text">hours</span>
+      </div>
+      <div class="timeminutes" style="color: aliceblue;">
+        <span class="number"></span>
+        <span class="text">minutes</span>
+      </div>
+      <div class="timeseconds" style="color: aliceblue;">
+        <span class="number"></span>
+        <span class="text">seconds</span>
+      </div>
+    </div>
+    <div >
+      <h2>
+        Soft landing of Chandrayaan-3 planned at 5:47 pm on August 23, says ISRO chief
+      </h2>
+    </div>
+  </section>
+
+  <script>
+    const timeDays = document.querySelector(".timedays .number"),
+      timeHours = document.querySelector(".timehours .number"),
+      timeMinutes = document.querySelector(".timeminutes .number"),
+      timeSeconds = document.querySelector(".timeseconds .number");
+
+    const endTime = new Date("August 23, 2023 17:47:00").getTime();
+
+    function updateTimer() {
+      const currentTime = new Date().getTime();
+      const timeRemaining = endTime - currentTime;
+
+      if (timeRemaining <= 0) {
+        clearInterval(timeFunction);
+        return;
+      }
+
+      timeDays.textContent = Math.floor(timeRemaining / (1000 * 60 * 60 * 24))
+        .toString()
+        .padStart(2, "0");
+
+      timeHours.textContent = Math.floor(
+        (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      )
+        .toString()
+        .padStart(2, "0");
+
+      timeMinutes.textContent = Math.floor(
+        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+      )
+        .toString()
+        .padStart(2, "0");
+
+      timeSeconds.textContent = Math.floor((timeRemaining % (1000 * 60)) / 1000)
+        .toString()
+        .padStart(2, "0");
+    }
+
+    updateTimer();
+    const timeFunction = setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
+
